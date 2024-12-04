@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "466524808667",
+    "project_id": "flutter-pet-project-f74f4",
+    "storage_bucket": "flutter-pet-project-f74f4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:466524808667:android:3f2558b649ec64f7c3b3fe",
+        "android_client_info": {
+          "package_name": "com.example.my_pet_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5qm98dFgqkXnpKi9CGsKPw0Q3KmRa_TQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
