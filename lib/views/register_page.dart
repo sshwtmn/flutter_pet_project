@@ -56,12 +56,22 @@ class _RegisterPageState extends State<RegisterPage> {
               onPressed: () async {
                 final email = _email.text.trim();
                 final password = _password.text.trim();
-                final userCredential = await FirebaseAuth.instance
-                    .createUserWithEmailAndPassword(
-                  email: email,
-                  password: password,
-                );
-                devtools.log(userCredential.toString());
+                try {
+                  final userCredential = await FirebaseAuth.instance
+                      .createUserWithEmailAndPassword(
+                    email: email,
+                    password: password,
+                  );
+                  devtools.log(userCredential.toString());
+                } on FirebaseAuthException catch (e) {
+                  if (e.code == 'weak-password') {
+                    devtools.log('Weak password');
+                  } else if (e.code == 'email-already-in-use') {
+                    devtools.log('Email is already in use');
+                  } else if (e.code == 'invalid-email') {
+                    devtools.log('message');
+                  }
+                }
               },
               child: const Text('Register')
           ),

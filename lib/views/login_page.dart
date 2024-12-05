@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'dart:developer' as devtools show log;
-
 import 'package:my_pet_project/constants/routes.dart';
+
+import '../utilities/show_error_dialog.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -19,8 +19,6 @@ class _LoginViewState extends State<LoginView> {
   void initState() {
     _email = TextEditingController();
     _password = TextEditingController();
-    devtools.log(_email.toString());
-    devtools.log(_password.toString());
     super.initState();
   }
 
@@ -64,20 +62,23 @@ class _LoginViewState extends State<LoginView> {
                     password: password,
                   );
                   Navigator.of(context)
-                      .pushNamedAndRemoveUntil('/welcome/', (route) => false);
-                  devtools.log(userCredential.toString());
+                      .pushNamedAndRemoveUntil(welcomeRoute, (route) => false);
+
                 } on FirebaseAuthException catch (e) {
                   if (e.code == 'invalid-credential') {
-                    devtools.log('INVALID CREDENTIALS');
+                    await showErrorDialog(
+                      context,
+                      'Error: ${e.code}',
+                    );
+
                   }
                 }
               },
               child: const Text('Login')),
           TextButton(
             onPressed: () {
-              Navigator.of(context).pushNamedAndRemoveUntil(
-                  registerRoute,
-                  (route) => false);
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil(registerRoute, (route) => false);
             },
             child: const Text('Not registred yet? Register here!'),
           )
@@ -86,3 +87,4 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 }
+
