@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer' as devtools show log;
 
+import 'package:my_pet_project/constants/routes.dart';
+
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
@@ -45,7 +47,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 final shouldLogOut = await showLogOutDialog(context);
                 if (shouldLogOut) {
                   await FirebaseAuth.instance.signOut();
-                  Navigator.of(context).pushNamedAndRemoveUntil('/login/', (_) => false);
+                  Navigator.of(context).pushNamedAndRemoveUntil(loginRoute, (_) => false);
                 }
                 devtools.log(shouldLogOut.toString());
               },

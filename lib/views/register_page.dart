@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer' as devtools show log;
 
+import 'package:my_pet_project/constants/routes.dart';
+
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -66,7 +68,7 @@ class _RegisterPageState extends State<RegisterPage> {
           TextButton(
               onPressed: () {
                 Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/login/',
+                    loginRoute,
                         (route) => false);
               },
               child: const Text('Already registered? Login Here!'))
