@@ -22,9 +22,17 @@ class _VerifyEmailWidgetState extends State<VerifyEmailWidget> {
             onPressed: () async {
               final user = FirebaseAuth.instance.currentUser;
               await user?.sendEmailVerification();
+
             },
             child: const Text('Send Email verification'),
-          )
+          ),
+          ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    '/login/',
+                        (route) => false);
+              },
+              child: const Text('Return to Login'))
         ],
       ),
     );

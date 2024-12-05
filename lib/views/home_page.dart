@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:my_pet_project/firebase_options.dart';
+import 'package:my_pet_project/views/welcome_page.dart';
 import 'package:my_pet_project/views/login_page.dart';
 import 'package:my_pet_project/views/verification_page.dart';
 
@@ -20,7 +21,7 @@ class HomePage extends StatelessWidget {
               final user = FirebaseAuth.instance.currentUser;
               if (user != null) {
                 if (user.emailVerified){
-                  print('Email is verified');
+                  return const WelcomePage();
                 }else {
                   return const VerifyEmailWidget();
                 }
