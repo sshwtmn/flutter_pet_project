@@ -3,6 +3,7 @@ import 'package:my_pet_project/constants/routes.dart';
 import 'package:my_pet_project/views/home_page.dart';
 import 'package:my_pet_project/views/login_page.dart';
 import 'package:my_pet_project/views/register_page.dart';
+import 'package:my_pet_project/views/verification_page.dart';
 import 'package:my_pet_project/views/welcome_page.dart';
 
 void main() {
@@ -17,6 +18,7 @@ void main() {
       loginRoute: (context) => const LoginView(),
       registerRoute: (context) => const RegisterPage(),
       welcomeRoute: (context) => const WelcomePage(),
+      emailVerificationRoute: (context) => const VerifyEmailWidget(),
 
     } ,
   ));

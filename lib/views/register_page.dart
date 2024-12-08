@@ -1,9 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'dart:developer' as devtools show log;
 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:my_pet_project/constants/routes.dart';
-
+import 'package:my_pet_project/utilities/show_error_dialog.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -62,24 +62,28 @@ class _RegisterPageState extends State<RegisterPage> {
                     email: email,
                     password: password,
                   );
-                  devtools.log(userCredential.toString());
                 } on FirebaseAuthException catch (e) {
                   if (e.code == 'weak-password') {
-                    devtools.log('Weak password');
+                    await showErrorDialog(context, 'Weak Password');
                   } else if (e.code == 'email-already-in-use') {
-                    devtools.log('Email is already in use');
+                    await showErrorDialog(context, 'Email already in use');
                   } else if (e.code == 'invalid-email') {
-                    devtools.log('message');
+                    await showErrorDialog(context, 'Invalid email');
+                  } else {
+                    await showErrorDialog(
+                      context,
+                      'Error ${e.code}',
+                    );
                   }
+                }catch (e) {
+                  await showErrorDialog(context, e.toString());
                 }
               },
-              child: const Text('Register')
-          ),
+              child: const Text('Register')),
           TextButton(
               onPressed: () {
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                    loginRoute,
-                        (route) => false);
+                Navigator.of(context)
+                    .pushNamedAndRemoveUntil(loginRoute, (route) => false);
               },
               child: const Text('Already registered? Login Here!'))
         ],
@@ -87,4 +91,3 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 }
-
